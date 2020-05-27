@@ -38,7 +38,6 @@ func _ready():
 	print("Listening on port: " + str(global.SERVER_PORT))
 	var result = peer.create_server(global.SERVER_PORT, global.MAX_PLAYERS)
 	get_tree().set_network_peer(peer)
-	get_tree().set_meta("network_peer", peer)
 	
 	# Connect the signals
 	get_tree().connect("network_peer_connected", self, "player_connected")
