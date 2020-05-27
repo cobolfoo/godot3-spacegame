@@ -47,7 +47,7 @@ func _ready():
 	# Connect signals
 	get_tree().connect("connected_to_server", self, "client_connected_ok")
 	get_tree().connect("connection_failed", self, "client_connected_fail")
-	get_tree().connect("server_disconnected", self, "client_server_disconnected")
+	get_tree().connect("server_disconnected", self, "server_disconnected")
 	
 	# Add a message to the chat box
 	add_chat("Welcome to this network test!")
@@ -156,8 +156,8 @@ func client_connected_ok():
 	rpc_id(1,"register_player", get_tree().get_network_unique_id(), my_info)
 	OS.set_window_title("Connected as " + my_info.name)
 
-func  client_server_disconnected():
-	print("Callback: client_server_disconnected")
+func  server_disconnected():
+	print("Callback: server_disconnected")
 	OS.alert('You have been disconnected!', 'Connection Closed')	
 	# Change to login scene
 	get_tree().change_scene("res://scenes/login.tscn")
