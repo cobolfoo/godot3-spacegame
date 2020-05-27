@@ -28,7 +28,7 @@ const PROJECTILE_SPEED = 20.0
 const PROJECTILE_DELAY = 0.1
 
 # Default hostname used by the login form
-const DEFAULT_HOSTNAME = "sidekick.local"
+const DEFAULT_HOSTNAME = "127.0.0.1"
 
 # Store information about connected players
 var player_info = {}
