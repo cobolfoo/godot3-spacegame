@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/spaceship_destroyed.wav-ddf518258c578932e1a20776a45f1880.sample"
+
+[deps]
+
+source_file="res://audio/spaceship_destroyed.wav"
+dest_files=[ "res://.import/spaceship_destroyed.wav-ddf518258c578932e1a20776a45f1880.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
