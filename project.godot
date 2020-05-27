@@ -15,7 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="net_test"
+config/name="Godot3 Space Game"
+config/description="This is a multi-player sample game."
 run/main_scene="res://scenes/login.tscn"
 config/icon="res://icon.png"
 
