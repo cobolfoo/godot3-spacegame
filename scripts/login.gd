@@ -36,10 +36,13 @@ func _on_button_login_pressed():
 	global.cfg_server_ip = IP.resolve_hostname(input_hostname.text)
 	
 	# Change to client scene
-	get_tree().change_scene("res://scenes/client.tscn")
+	if get_tree().change_scene("res://scenes/client.tscn") != OK:
+		print("Unable to load client scene!")
 
 # Callback function for "Start Server" button
 func _on_button_start_server_pressed():
 	# Change to server scene
-	get_tree().change_scene("res://scenes/server.tscn")
+	if get_tree().change_scene("res://scenes/server.tscn") != OK:
+		print("Unable to load server scene!")
+
 

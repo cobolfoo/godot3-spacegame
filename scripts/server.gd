@@ -36,12 +36,19 @@ func _ready():
 	print("Max players: " + str(global.MAX_PLAYERS))
 	var peer = NetworkedMultiplayerENet.new()
 	print("Listening on port: " + str(global.SERVER_PORT))
-	var result = peer.create_server(global.SERVER_PORT, global.MAX_PLAYERS)
-	get_tree().set_network_peer(peer)
+	if peer.create_server(global.SERVER_PORT, global.MAX_PLAYERS) != OK:
+		print("Unable to create server")
+		return
+		
+	if get_tree().set_network_peer(peer) != OK:
+		print("Unable to set network peer!")
 	
 	# Connect the signals
-	get_tree().connect("network_peer_connected", self, "player_connected")
-	get_tree().connect("network_peer_disconnected", self, "player_disconnected")
+	if get_tree().connect("network_peer_connected", self, "player_connected") != OK:
+		print("Unable to connect signal (network_peer_connected) !")
+		
+	if get_tree().connect("network_peer_disconnected", self, "player_disconnected") != OK:
+		print("Unable to connect signal (network_peer_disconnected) !")
 	
 	
 func _process(delta):
@@ -211,8 +218,6 @@ remote func register_player(id, info):
 remote func player_input(id, key, pressed):
 	print("Remote: player_input(" + str(id)+","+key+","+str(pressed)+")")
 
-	var info = player_info[id]
-	
 	if key == "left":
 		player_info[id].rotation = -1 if pressed else 0
 	elif key == "right":

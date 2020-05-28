@@ -45,15 +45,20 @@ func _ready():
 	my_peer = peer
 	
 	# Connect signals
-	get_tree().connect("connected_to_server", self, "client_connected_ok")
-	get_tree().connect("connection_failed", self, "client_connected_fail")
-	get_tree().connect("server_disconnected", self, "server_disconnected")
+	if get_tree().connect("connected_to_server", self, "client_connected_ok") != OK:
+		print("Unable to connect signal (connected_to_server) !")
+		
+	if get_tree().connect("connection_failed", self, "client_connected_fail") != OK:
+		print("Unable to connect signal (connection_failed) !")
+		
+	if get_tree().connect("server_disconnected", self, "server_disconnected") != OK:
+		print("Unable to connect signal (server_disconnected) !")
 	
 	# Add a message to the chat box
 	add_chat("Welcome to this network test!")
 	add_chat("Connecting to server ....")
 	
-func _process(delta):
+func _process(_delta):
 	
 	# To mitigate latency issues we use interpolation. The idea is simple, we receive
 	# position updates every TICK_DURATION (50 ms, 20 per seconds). We interpolate between
@@ -101,10 +106,10 @@ func _process(delta):
 	camera.set_offset(pos)
 
 	# Handle input (keyboard)
-	handle_input(delta)
+	handle_input()
 		
 
-func handle_input(delta):
+func handle_input():
 	
 	# If not connected, don't handle input.
 	if not my_peer.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_CONNECTED:
@@ -160,13 +165,15 @@ func  server_disconnected():
 	print("Callback: server_disconnected")
 	OS.alert('You have been disconnected!', 'Connection Closed')	
 	# Change to login scene
-	get_tree().change_scene("res://scenes/login.tscn")
+	if get_tree().change_scene("res://scenes/login.tscn") != OK:
+		print("Unable to load login scene!")
 
 func client_connected_fail():
 	print("Callback: client_connected_fail")
 	OS.alert('Unable to connect to server!', 'Connection Failed')
 	# Change to login scene
-	get_tree().change_scene("res://scenes/login.tscn")
+	if get_tree().change_scene("res://scenes/login.tscn") != OK:
+		print("Unable to load login scene!")
 	
 remote func player_joined(id, info):
 	print("Callback: player_joined(" + str(id)+"," + str(info) + ")")

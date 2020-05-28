@@ -23,7 +23,7 @@ var previous_position = null
 func _ready():
 	var sprite = Sprite.new()
 	sprite.texture = texture_star
-	for i in range(2000):
+	for _i in range(2000):
 		var x = rand_range(-2000, 2000)
 		var y = rand_range(-2000, 2000)
 		# Using VisualServer to prevent performance issues
@@ -39,7 +39,7 @@ func _ready():
 		sprites.append(ci_rid)
 		
 
-func _process(delta):
+func _process(_delta):
 
 	if previous_position == null:
 		previous_position = node_camera.offset
