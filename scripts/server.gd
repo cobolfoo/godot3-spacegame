@@ -40,8 +40,7 @@ func _ready():
 		print("Unable to create server")
 		return
 		
-	if get_tree().set_network_peer(peer) != OK:
-		print("Unable to set network peer!")
+	get_tree().set_network_peer(peer)
 	
 	# Connect the signals
 	if get_tree().connect("network_peer_connected", self, "player_connected") != OK:
